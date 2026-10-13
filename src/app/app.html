@@ -1,0 +1,79 @@
+<div class="dashboard">
+  <header class="dashboard-header">
+    <div>
+      <p class="head-text">YOUR FINANCIAL OVERVIEW</p>
+      <h1>Banking Products</h1>
+      <p class="subtitle">
+        Manage all your financial products in one place.
+      </p>
+    </div>
+
+    <button class="profile-button" aria-label="User profile">
+      AK
+    </button>
+  </header>
+
+  <section class="welcome-section">
+    <div>
+      <h2>Welcome back, Ajith!</h2>
+      <p>Here is an overview of your banking products.</p>
+    </div>
+
+    <span class="product-count">{{ products.length }} Products</span>
+  </section>
+
+  <section class="filter-section">
+    <input type="search" placeholder="Search banking products..." aria-label="Search banking products"
+      [value]="searchText" (input)="search($event)" />
+
+    <div class="category-filters">
+      @for (category of categories; track category) {
+      <button type="button" class="filter-button" [class.selected]="selectedCategory === category"
+        (click)="selectedCategory = category">
+        {{ category }}
+      </button>
+      }
+    </div>
+  </section>
+  <section class="product-grid">
+    @for (product of filteredProducts; track product.id) {
+
+    <app-product-card [product]="product" (viewDetails)="openProductDetails($event)" />
+
+    } @empty {
+    <p class="empty-state">
+      No banking products found. Try another search.
+    </p>
+    }
+  </section>
+
+  @if (selectedProduct; as product) {
+  <div class="modal-backdrop" (click)="selectedProduct = null">
+    <section class="details-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"
+      (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 id="modal-title">Product Details</h2>
+        <button class="close-button" type="button" aria-label="Close details" (click)="selectedProduct = null">
+          ✕
+        </button>
+      </div>
+
+      <p class="detail-label">Product Name</p>
+      <h3>{{ product.name }}</h3>
+
+      <p class="detail-label">Category</p>
+      <p>{{ product.category }}</p>
+
+      <p class="detail-label">Status</p>
+      <p>{{ product.status }}</p>
+
+      <p class="detail-label">{{ product.metricLabel }}</p>
+      <p class="detail-value">{{ product.metricValue }}</p>
+
+      <button class="details-button" type="button" (click)="selectedProduct = null">
+        Close
+      </button>
+    </section>
+  </div>
+  }
+</div>
