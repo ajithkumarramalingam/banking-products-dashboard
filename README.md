@@ -4,6 +4,10 @@
 
 A responsive banking products dashboard built using Angular. It provides a unified view of different banking products on a single screen.
 
+## Dashboard Preview
+![Banking Products Dashboard One](screenshots/banking-dashboard-desktop-1.png)
+![Banking Products Dashboard Two](screenshots/banking-dashboard-desktop-2.png)
+
 ## Features
 
 - Displays four banking product types: Savings Account, Credit Card, Loan, and Investment.
